@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: humanize-french-article
+expected_outcome: |
+  A French text (not translated) that reads like a person wrote it: no "Excellente question", no "ce n'est pas seulement X, c'est Y", no self-answered question, no dramatic closer, no dash for an aside, no semicolon, all facts kept (Relais 3.0, 14 mois, tri automatique des tickets, jusqu'à 35 % de temps de réponse en moins, Slack et Zendesk, plus de 60 clients en bêta, 49 € par mois, lancement le 3 mars à 9 h 30, relais.example). French typography is applied: a space before ? ! :, « » quotation marks, "35 %", "49 €", "9 h 30", "lundi" and "mars" in lower case, "À" with its accent.

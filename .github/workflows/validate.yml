@@ -26,6 +26,16 @@ jobs:
           echo "The gateway examines the token." > good.txt
           python scripts/ste_check.py good.txt
 
+      - name: Checker handles French
+        run: |
+          printf '%s\n' "Excellente question! Le jeton est validé par la passerelle, garantissant ainsi la sécurité." > bad-fr.txt
+          if python scripts/ste_check.py bad-fr.txt; then echo "expected findings"; exit 1; fi
+          python scripts/ste_check.py --fix-spaces bad-fr.txt
+          if python scripts/ste_check.py bad-fr.txt | grep -q "typo-T1"; then echo "no-break space not written"; exit 1; fi
+          printf '%s\n' "La passerelle valide le jeton. Ensuite, elle transmet la requête au service." > good-fr.txt
+          python scripts/ste_check.py good-fr.txt
+          python scripts/ste_check.py references/french-typography.md
+
       - name: Version is the same everywhere
         run: |
           v_skill=$(grep -E '^\s+version:' SKILL.md | head -1 | sed -E 's/.*"(.*)".*/\1/')

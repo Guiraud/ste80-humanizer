@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.1.0
+
+- French support. SKILL.md has a new section "French text": the French phrases for Pass 1, the S-rules that change in French, and a third pass for French typography (T1 to T12).
+- New `references/french.md`, written in French: the 26 tells with French phrases and examples, the S-rules for French, a list of plain words and a full example.
+- New `references/french-typography.md`, written in French: spaces and punctuation, quotation marks, capitals, numbers, units, dates, abbreviations, dashes, lists, ligatures and italics. It also says which rule wins when typography and the other passes disagree.
+- `ste_check.py` finds the language (`--lang auto`, `en` or `fr`). In French it flags French tells, French stock words, possible passive voice and typography errors. The limits for sentence length have 5 words of slack in French at 80%.
+- `ste_check.py --fix-spaces` writes the no-break spaces of French typography into a file. It leaves code, URLs and front matter alone.
+- New eval case: `humanize-french-article`.
+
 ## 4.0.0
 
 - SKILL.md is now 217 lines instead of 573, and about 2,650 words instead of 6,250. Pass 1 and Pass 2 are compact tables with one example per group.

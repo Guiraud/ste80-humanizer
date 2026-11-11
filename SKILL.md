@@ -8,10 +8,12 @@ description: |
   rebuilds the text with the structure of Simplified Technical English: one idea per
   sentence, short sentences, active voice, simple tenses, plain words. Use it whenever the
   user wants text humanized, de-AI'd, made clearer, simpler or less robotic, asks for
-  ASD-STE100 or STE, or wants docs, READMEs, emails, posts or answers tightened.
+  ASD-STE100 or STE, or wants docs, READMEs, emails, posts or answers tightened. It works
+  on English and on French text. For French it also applies French typography (use it
+  for "humaniser", "rendre ce texte plus naturel", "langage clair", "typographie française").
 license: MIT
 metadata:
-  version: "4.0.0"
+  version: "4.1.0"
   author: "Dodaios"
 ---
 
@@ -23,6 +25,8 @@ The skill has two passes:
 
 - **Pass 1 (§1 to §26)** removes AI tells: habits that people recognize as machine writing.
 - **Pass 2 (S1 to S15)** rebuilds sentences with the structure of ASD-STE100, softened to 80%.
+
+For French text, a third pass (T1 to T12) applies French typography. See "French text".
 
 Report your edits by these numbers. *Weak alone* means: act only when other tells are near it.
 
@@ -181,6 +185,55 @@ Act on §26 only when you can see the conversation or the text is plainly a repl
 
 `references/worked-example.md` shows one text after Pass 1 and after Pass 2.
 
+## French text
+
+Work in French. Do not translate. Before you edit French text, read `references/french.md` (the tells, the structure rules and the plain words, all in French) and `references/french-typography.md` (T1 to T12). The §-numbers and S-numbers stay the same.
+
+**Pass 1.** The tells are the same, but the phrases are French:
+
+| § | French phrases to watch for |
+|---|---|
+| 1 | ce n'est pas seulement X, c'est Y; non seulement X, mais aussi Y; il ne s'agit pas de X, mais de Y |
+| 2 | "Et ça change tout."; a question with its own answer ("Le résultat ? Un gain de temps.") |
+| 4, 5 | Plongeons dans, Voici ce qu'il faut retenir, Soyons clairs, Contrairement aux idées reçues |
+| 12 | crucial, incontournable, véritable, robuste, pléthore, mettre en lumière, il convient de noter. Also calques from English: faire sens, adresser un problème, au final, impacter |
+| 15 | ", soulignant", ", témoignant de", ", permettant ainsi de", ", garantissant" |
+| 18 | constitue, s'avère, se positionne comme, dispose de, bénéficie de (write "est", "a") |
+| 22 | Excellente question !, N'hésitez pas à, J'espère que cela vous aide |
+
+§10 is an English tell. Do not apply it to French.
+
+**Pass 2.** These S-rules change:
+
+- **S2.** French often needs more words than English. At 80%, accept up to 25 words for an instruction and 30 for a description. Strict keeps 20 and 25.
+- **S6.** Name the actor. Do not hide it behind "on" or a pronominal passive.
+- **S7.** The simple tenses are présent, passé composé, imparfait, futur simple and impératif. No passé simple outside a story.
+- **S8.** "vérifier", not "procéder à la vérification de". No chains of participes présents.
+- **S9.** "peut", "doit" and the future. "devrait" and "pourrait" only for real doubt or advice.
+- **S12.** Three "de" complements in a row at most.
+- **Instructions.** Use the impératif with "vous". Keep "tu" or the infinitive if the source uses it. Keep the writer's choice on inclusive writing.
+
+**Pass 3: typography.**
+
+| T | Rule |
+|---|---|
+| 1 | No-break space (U+00A0) before : ; ! ? and none before a comma or a period. |
+| 2 | French quotation marks « » with no-break spaces inside. Not "..." in prose. |
+| 3 | One apostrophe style per text: ’ in published prose, ' in technical Markdown. |
+| 4 | Accents on capitals (À, É). Lower case for days, months and languages. Sentence case in headings. |
+| 5 | Decimal comma (25,50). No-break space between thousands (1 000). |
+| 6 | No-break space before a unit or symbol: 200 km, 85 %, 48 €. The currency symbol follows the amount. |
+| 7 | Times as 9 h 30. Dates as "le 9 septembre 2023". |
+| 8 | M., Mme, Dr, etc., 1er, 2e (not "Mr", "2ème"). Sigles in capitals with no periods. |
+| 9 | Hyphen in compound words. En dash only between two numbers (1998–2000). Em dash only to open a line of dialogue. |
+| 10 | Keep the Markdown list markup. One form per list. No semicolon at the end of items. |
+| 11 | Ligatures: œuvre, cœur, sœur. |
+| 12 | Italics for titles of works and foreign words. Never italics and quotation marks together. |
+
+Where the passes disagree: §8 wins over the typographic dash for an aside, and S15 wins over the list semicolon. T2 wins over §21 in French prose. A T-rule changes the form of a number, never its value. T-rules do not apply to code, data, URLs or exact quotes.
+
+In file mode, run `python scripts/ste_check.py --fix-spaces <file>` after the rewrite. It writes the no-break spaces of T1, T2 and T6.
+
 ## Fidelity rules
 
 Short sentences tempt the writer to drop qualifiers, and Pass 1 tempts the writer to "improve" content. So:
@@ -203,15 +256,16 @@ A person can make any of these choices on purpose. Several tells together are th
 - **Fiction, poetry, speeches, jokes, brand copy.** Pass 1 only if asked. No Pass 2: STE removes voice on purpose.
 - **Contracts, legal and regulatory text.** Do not rewrite. Offer a plain summary next to it.
 - **Code.** Edit prose, comments and docs only.
-- **Other languages.** Do Pass 1 and the structure rules of Pass 2 with that language's plain words. Do not translate.
+- **Other languages.** For French, see "French text". For any other language, do Pass 1 and the structure rules of Pass 2 with that language's plain words and typography. Do not translate.
 
 Keep the details that carry the writer's voice: a specific odd detail, mixed feelings, slang and in-jokes, a first-person choice, a real aside or self-correction.
 
 ## Checker
 
-`scripts/ste_check.py` is a small linter with no dependencies. It flags many Pass 1 tells and the measurable Pass 2 rules. It is a heuristic, not an AI detector or a compliance check.
+`scripts/ste_check.py` is a small linter with no dependencies. It flags many Pass 1 tells and the measurable Pass 2 rules, in English and in French. For French it also flags typography errors. It finds the language by itself (`--lang en` or `--lang fr` forces it). It is a heuristic, not an AI detector or a compliance check.
 
 ```bash
 python scripts/ste_check.py draft.md              # Humanize / 80%
 python scripts/ste_check.py --strict runbook.md   # Strict STE
+python scripts/ste_check.py --fix-spaces texte.md # French: write the no-break spaces
 ```

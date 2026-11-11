@@ -17,6 +17,8 @@ STE80 Humanizer makes AI-written text read like a careful person wrote it, witho
 >
 > A bad probe can also cause many restarts. For example, a timeout that is too short makes healthy containers fail the probe. To prevent this, set `initialDelaySeconds` and `failureThreshold` to values that fit your application.
 
+The skill works on English and on French text. For French, it uses French phrases for the tells and adds a third pass for French typography. See [French](#french-le-français).
+
 The goal is text that people read easily. Getting past AI detectors is not a goal.
 
 ## Why two passes
@@ -121,6 +123,7 @@ Explain how TLS handshakes work in STE.
 Light touch: just remove the AI stuff from docs/intro.md.
 Convert docs/runbook.md to strict STE.
 Does this email sound like AI? Just tell me, don't rewrite it.
+Ce texte sent l'IA. Rends-le plus naturel et corrige la typographie.
 ```
 
 | Mode | When | What it does |
@@ -192,6 +195,35 @@ Does this email sound like AI? Just tell me, don't rewrite it.
 
 More examples: [references/ste80-rules.md](references/ste80-rules.md). Full strict rules and a checklist: [references/strict-mode.md](references/strict-mode.md). More than 100 plain-word swaps: [references/word-swaps.md](references/word-swaps.md).
 
+## French (le français)
+
+The skill treats French as a full language, not as translated English. When the text is French, it works in French and does three passes:
+
+1. **Pass 1** uses the French form of each tell: "ce n'est pas seulement X, c'est Y", "Et ça change tout.", "Plongeons dans", "il convient de noter", ", témoignant de", "constitue", "N'hésitez pas à". It also removes calques from English such as "faire sens" and "adresser un problème".
+2. **Pass 2** applies the S-rules with French grammar: présent, passé composé and futur simple, "vous" imperatives, a named actor in place of "on", "vérifier" in place of "procéder à la vérification de". At 80%, a sentence can have up to 25 words (instruction) or 30 words (description).
+3. **Pass 3** applies French typography, rules T1 to T12.
+
+| # | Typography rule | Before | After |
+|---|---|---|---|
+| T1 | No-break space before : ; ! ? | Vraiment? | Vraiment ? |
+| T2 | French quotation marks | "bonjour" | « bonjour » |
+| T3 | One apostrophe style per text | l'outil, l’outil | l'outil, l'outil |
+| T4 | Accents on capitals, lower case for days and months | A partir de Lundi | À partir de lundi |
+| T5 | Decimal comma, space between thousands | 1,000.50 | 1 000,50 |
+| T6 | Space before units and symbols, currency after the amount | 85%, $20 | 85 %, 20 $ |
+| T7 | Times and dates | 9h30 | 9 h 30 |
+| T8 | Abbreviations and ordinals | Mr, 2ème | M., 2e |
+| T9 | Hyphen, en dash for ranges, em dash for dialogue only | 1998-2000 | 1998–2000 |
+| T10 | Lists: one form, no semicolons | élément ; | Élément. |
+| T11 | Ligatures | oeuvre, coeur | œuvre, cœur |
+| T12 | Italics for titles of works, never with quotation marks | « *Les Misérables* » | *Les Misérables* |
+
+Three rules of classic French typography give way to the other passes. The skill does not use a dash for an aside (§8). It does not end list items with a semicolon (S15). It uses « » in French prose, and keeps straight quotes in code (§21).
+
+The French rules are in two files, written in French: [references/french.md](references/french.md) and [references/french-typography.md](references/french-typography.md). The typography rules follow the *Lexique des règles typographiques en usage à l'Imprimerie nationale* and the recommendations of the Académie française.
+
+**En bref, en français.** Collez un texte français et demandez « humanise ce texte ». Le skill retire les tics d'IA, raccourcit les phrases, met la voix active et corrige la typographie. Il garde chaque fait et ne traduit rien.
+
 ## Checker
 
 `scripts/ste_check.py` is a small Python linter with no dependencies. It flags many Pass 1 tells, such as not-X-but-Y, chatbot phrases, run-ups, fake depth, stacked hedges, vague authority and association, "-ing" riders, inflated claims, AI words, hyphen pairs and curly quotes. It also flags the measurable Pass 2 rules: sentence and paragraph length, semicolons, dashes, passive voice, perfect and progressive tenses, "-ing" forms and phrasal verbs.
@@ -200,20 +232,25 @@ More examples: [references/ste80-rules.md](references/ste80-rules.md). Full stri
 python scripts/ste_check.py README.md
 python scripts/ste_check.py --strict docs/runbook.md
 cat draft.txt | python scripts/ste_check.py -
+python scripts/ste_check.py --lang fr article.md
+python scripts/ste_check.py --fix-spaces article.md
 ```
+
+The checker finds the language (English or French) by itself. In French, it flags the French tells and stock words, possible passive voice and typography errors (rules `typo-T1` to `typo-T11`). `--fix-spaces` changes a French file in place: it writes the no-break spaces before `: ; ! ?`, inside « » and before units. It does not change code, URLs or front matter.
 
 It is a heuristic, not an AI detector and not a compliance checker.
 
 ## Tests
 
-`evals/` has four cases in the `claude plugin eval` format: a README rewrite, an explanation from scratch, a strict runbook and a casual LinkedIn post that does not mention STE. Run them with `claude plugin eval . --allow-tools Write,Edit,Bash`.
+`evals/` has five cases in the `claude plugin eval` format: a README rewrite, an explanation from scratch, a strict runbook, a casual LinkedIn post that does not mention STE and a French article. Run them with `claude plugin eval . --allow-tools Write,Edit,Bash`.
 
 What we saw: when the prompt names ASD-STE100, the base model already gets the style mostly right. The skill made the difference in fidelity. In the LinkedIn rewrite, the run without the skill invented a quote and changed "40+ customers" to "40-odd". The run with the skill kept every fact. In the README rewrite, it kept "you may need to" and flagged a contradiction in the source. These are small tests, so treat them as a hint, not proof.
 
 ## Limits
 
 - **STE is for clear explanatory text.** For fiction, speeches and brand copy, the skill does Pass 1 only.
-- **STE is an English standard.** For other languages, the skill applies the tells and the structure rules, but not the English word lists.
+- **STE is an English standard.** For French, the skill applies the structure rules with French grammar, French word lists and French typography. It does not follow a French controlled-language standard. For other languages, the skill applies the tells and the structure rules, but it has no word lists.
+- **The French checker is a heuristic.** French verbs and adjectives have many forms, so the checker misses some cases and flags some correct sentences.
 - **"STE style" is not "STE compliant."** Compliance needs the official dictionary, trained writers and review.
 
 ## Sources and credits
@@ -222,6 +259,7 @@ What we saw: when the prompt names ASD-STE100, the base model already gets the s
 - ASD-STE100 Issue 9 (2025): https://www.asd-ste100.org
 - Wikipedia, [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (WikiProject AI Cleanup)
 - [blader/humanizer](https://github.com/blader/humanizer) by Siqi Chen (MIT). Pass 1 follows its 26-pattern catalog and order, with new examples. Its license notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- *Lexique des règles typographiques en usage à l'Imprimerie nationale* and the recommendations of the Académie française, for the French typography rules.
 - Hacker News discussion of STE skills (July 2026): https://news.ycombinator.com/item?id=49114639
 
 ## Disclaimer
