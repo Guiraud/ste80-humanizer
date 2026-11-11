@@ -152,8 +152,23 @@ FR_SWAPS = [
     (r"est en mesure d[e']|sont en mesure d[e']|est susceptible d[e']|sont susceptibles d[e']", "être en mesure de", "pouvoir"),
     (r"a pour (?:but|objectif|vocation) d[e']", "avoir pour but de", "sert à"),
     (r"fai(?:t|re|sant) sens", "faire sens", "avoir du sens"),
-    (r"adress(?:e|ent|er|ant) (?:un|le|ce|ces|les|des) (?:problème|enjeu|défi|question)s?", "adresser un problème", "traiter"),
+    (r"adress(?:e|ent|er|ant) (?:un|le|ce|ces|les|des) (?:problème|enjeu|défi|question|bug|faille|besoin)s?", "adresser un problème", "traiter"),
     (r"au final", "au final", "finalement, ou supprimer"),
+    (r"délivr(?:e|es|ent|er|ez|é|ée|és|ées|ant)", "délivrer", "livrer, fournir"),
+    (r"support(?:e|ent|er|é|ée|és|ées) (?:désormais |maintenant |aussi |enfin |nativement )?(?:le |la |les |l')?(?:format|protocole|ipv\d|version|norme|standard|navigateur|api)", "supporter (un format)", "prendre en charge"),
+    (r"opportunités?", "opportunité", "occasion"),
+    (r"digital(?:e|es|aux)?", "digital", "numérique"),
+    (r"clés? en main", "clé en main", "(fait ou supprimer)"),
+    (r"à la pointe", "à la pointe", "(fait ou supprimer)"),
+    (r"en constante évolution", "en constante évolution", "(fait ou supprimer)"),
+    (r"leviers?", "levier", "moyen, ou le fait"),
+    (r"écosystèmes?", "écosystème", "ensemble d'outils, ou le nom exact"),
+    (r"paysage (?:actuel|numérique|technologique|médiatique)", "paysage", "domaine, secteur"),
+    (r"décrypt(?:e|ons|er|ez|ant)", "décrypter", "expliquer"),
+    (r"méticuleu(?:x|se|ses)|méticuleusement", "méticuleux", "soigneux, ou le fait"),
+    (r"se révèl(?:e|ent) être", "se révéler être", "être"),
+    (r"jou(?:e|ent) le rôle d[eu']", "jouer le rôle de", "être"),
+    (r"de renom|sans précédent|un cadre exceptionnel|une expérience unique|un large éventail|riche patrimoine", "langage de vente", "(fait ou supprimer)"),
     (r"en charge d[eu']", "en charge de", "chargé de"),
     (rf"cruci(?:al{_ADJ}|aux)", "crucial", "important, ou le fait"),
     (rf"primordi(?:al{_ADJ}|aux)", "primordial", "important, ou le fait"),
@@ -200,21 +215,29 @@ FR_TELLS = [
     (r"\bnon seulement\b[^.]{0,100}\bmais\b", "not-x-but-y", "'non seulement X, mais Y': state the point"),
     (r"\bil ne s'agit pas (?:seulement |simplement |uniquement )?d[e']", "not-x-but-y", "'il ne s'agit pas de X, mais de Y': state the point"),
     (r"\bbien plus qu'un|\bloin d'être (?:un|une) simple\b", "not-x-but-y", "'bien plus qu'un X': state the point"),
+    (r"\bne se content(?:e|ent) pas d[e']|,\s+(?:zéro prise de tête|sans friction)\b", "not-x-but-y", "'ne se contente pas de X' or negative tail: state the point"),
+    (r"^[\"«\s]*(?:vous avez (?:tout à fait|entièrement|parfaitement) raison|voici (?:un|une) (?:aperçu|résumé|tour d'horizon))\b|\ben tant qu'(?:ia|intelligence artificielle|assistant)\b|\ben tant que modèle de langage\b", "chatbot", "chatbot residue: delete"),
     (r"^[\"«\s]*(?:(?:excellente|très bonne|bonne) question|bien sûr|absolument|certainement|avec plaisir|tout à fait)\s?[!,.]", "chatbot", "chatbot opener: delete"),
     (r"\bj'espère que (?:cela|ça|ceci) (?:vous |t')?(?:aide|aidera|sera utile)|\bn'hésite[zs]? pas à\b|\bsouhaite[zs]-(?:vous|tu) que je\b|\bfaites-moi savoir\b|\bdites-moi si\b", "chatbot", "chatbot closer: delete"),
-    (r"\bplongeons\b|\bentrons dans le vif\b|\bvoici ce qu'il faut (?:savoir|retenir)\b|\bsans plus attendre\b|\bdécortiquons\b|\bexplorons\b|\bsoyons honnêtes\b|\bdisons-le\b", "run-up", "run-up before the point: start with the point"),
-    (r"\bau fond,|\bla vraie question (?:est|, c'est)\b|\ben fin de compte\b|\bfondamentalement\b|\bdans un monde où\b|\bà l'ère d[eu']|\bà l'heure où\b", "fake-depth", "fake depth: say the plain claim"),
-    (r"\bet (?:ça|cela) change tout\b|\bpoint final\b|\brien de plus,? rien de moins\b|\bà méditer\b|^(?:le résultat|la raison|la bonne nouvelle|le problème|la solution) \?", "closer", "dramatic closer or self-answered question: delete"),
-    (r"\bsoyons clairs?\b|\bentendons-nous bien\b|\bque les choses soient claires\b|\bcontrairement aux idées reçues\b|\b(?:vous pensez peut-être|on pourrait (?:penser|croire)) qu[e']", "strawman", "arguing with nobody: remove"),
-    (r"\bà ma connaissance\b|\bd'après mes (?:dernières )?(?:informations|données)\b|\bselon les informations disponibles\b|\bjusqu'à ma dernière mise à jour\b", "knowledge-hedge", "knowledge-limit hedge: delete"),
+    (r"\bplongeons\b|\bentrons dans le vif\b|\bvoici ce qu'il faut (?:savoir|retenir)\b|\bsans plus attendre\b|\bdécortiquons\b|\bexplorons\b|\bsoyons honnêtes\b|\bdisons-le\b|\bdans le paysage actuel d[eu']|\bmaintenant que nous avons posé les bases\b|\bla vérité, c'est que\b|^franchement \?|\bil convient de souligner\b", "run-up", "run-up before the point: start with the point"),
+    (r"\bau fond,|\bla vraie question (?:est|, c'est)\b|\ben fin de compte\b|\bfondamentalement\b|\bdans un monde où\b|\bà l'ère d[eu']|\bà l'heure où\b|\ble cœur du problème\b|\bce qui compte vraiment\b|\bincarne(?:nt)? l'essence\b", "fake-depth", "fake depth: say the plain claim"),
+    (r"\bet (?:ça|cela) change tout\b|\bpoint final\b|\brien de plus,? rien de moins\b|\bà méditer\b|\btout est dit\b|\bc'est toute la différence\b|^(?:en conclusion|en somme|pour résumer),|^(?:le résultat|la raison|la bonne nouvelle|le problème|la solution) \?", "closer", "dramatic closer or self-answered question: delete"),
+    (r"\bsoyons clairs?\b|\bentendons-nous bien\b|\bque les choses soient claires\b|\bcontrairement aux idées reçues\b|\bcomprenez-moi bien\b|\bje ne dis pas que\b|\bloin de moi l'idée\b|\bcertains diront\b|\bon pourrait être tenté\b|\b(?:vous pensez peut-être|on pourrait (?:penser|croire)) qu[e']", "strawman", "arguing with nobody: remove"),
+    (r"\bà ma connaissance\b|\bd'après mes (?:dernières )?(?:informations|données)\b|\bselon les informations disponibles\b|\bjusqu'à ma dernière mise à jour\b|\bbien que les (?:détails|informations) soient (?:limité|peu documenté)e?s\b|\bnon documentée?s? publiquement\b", "knowledge-hedge", "knowledge-limit hedge: delete"),
     (r"\bdans (?:cet article|ce guide|cette section|ce billet),? (?:nous|je) (?:allons|vais|verrons|verrai)\b|\bcomme (?:mentionné|évoqué|indiqué) (?:précédemment|plus haut|ci-dessus)\b", "meta", "writing about the text: give the content"),
-    (r"\b(?:pourrai(?:t|ent)|peu(?:t|vent)|semble(?:nt)?) (?:potentiellement|éventuellement|peut-être|possiblement)\b|\bpourrai(?:t|ent) sembler\b", "stacked-hedge", "stacked hedge: keep one hedge"),
-    (r"\b(?:les experts|(?:des|les|plusieurs) études|de nombreux (?:experts|observateurs|spécialistes)|les spécialistes) (?:s'accordent|disent|affirment|montrent|estiment|suggèrent|pensent)\b", "vague-authority", "vague authority: name the source or delete"),
-    (r",\s+(?:soulignant|témoignant|reflétant|illustrant|garantissant|assurant|favorisant|contribuant|renforçant|permettant|offrant|mettant en)\b", "ing-rider", "shallow '-ant' rider: delete or make it a sentence"),
-    (r"\bjoue(?:nt)? un rôle (?:clé|crucial|essentiel|central|majeur|déterminant|primordial)\b|\bmarque(?:nt)? (?:un tournant|une étape (?:clé|majeure|importante))\b|\bl'avenir s'annonce\b|\bs'inscri(?:t|vent) dans une (?:dynamique|démarche|tendance|logique)\b", "inflation", "inflated significance: say what happened"),
-    (r"\b(?:est|sont|était|étaient) (?:lié|associé)e?s? (?:à|au|aux)\b|\ben lien avec\b", "vague-association", "vague connection: name the relation (cause, fait partie de, a fondé)"),
+    (r"\b(?:pourrai(?:t|ent)|peu(?:t|vent)|semble(?:nt)?) (?:potentiellement|éventuellement|peut-être|possiblement)\b|\bpourrai(?:t|ent) sembler\b|\bil se pourrait que\b[^.]{0,60}\b(?:peut-être|dans une certaine mesure|potentiellement)\b|\bil semblerait que\b[^.]{0,60}\b(?:peut-être|pourrait|potentiellement)\b", "stacked-hedge", "stacked hedge: keep one hedge"),
+    (r"\b(?:les experts|(?:des|les|plusieurs) études|de nombreux (?:experts|observateurs|spécialistes)|les spécialistes) (?:s'accordent|disent|affirment|montrent|estiment|suggèrent|pensent)\b|\bil est (?:largement|généralement) (?:reconnu|admis)\b|\bselon certains observateurs\b", "vague-authority", "vague authority: name the source or delete"),
+    (r",\s+(?:soulignant|témoignant|reflétant|illustrant|garantissant|assurant|favorisant|contribuant|renforçant|permettant|offrant|mettant en|symbolisant)\b", "ing-rider", "shallow '-ant' rider: delete or make it a sentence"),
+    (r"\bjoue(?:nt)? un rôle (?:clé|crucial|essentiel|central|majeur|déterminant|primordial)\b|\bmarque(?:nt)? (?:un tournant|une étape (?:clé|majeure|importante))\b|\bl'avenir s'annonce\b|\bouvr(?:e|ent) la voie à\b|\blaisse(?:nt)? une empreinte\b|\bs'impos(?:e|ent) comme une référence\b|\bmalgré ces défis\b|\bfait (?:remarquable|notable)\b|\bde (?:façon|manière) impressionnante\b", "inflation", "inflated significance: say what happened"),
+    (r"\b(?:est|sont|était|étaient) (?:lié|associé)e?s? (?:à|au|aux)\b|\ben lien avec\b|\ben relation avec\b|\bimpliquée?s? dans\b", "vague-association", "vague connection: name the relation (cause, fait partie de, a fondé)"),
     (r"\b(?:est|sont|était|étaient) en train d[e']", "progressive", "'en train de': use the present tense"),
+    (r"\bs'inscri(?:t|vent|re) dans (?:une|la|cette) (?:dynamique|démarche|tendance|logique)\b|\bvien(?:t|nent) (?:renforcer|compléter|enrichir|corriger|s'ajouter|apporter|confirmer)\b|\bse veu(?:t|lent)\b|\bapport(?:e|ent|er) une réponse à\b", "empty-verb", "empty verb or phrase (§29): use the verb that carries the action"),
 ]
+
+# §27: a connector at the start of a sentence
+FR_CONNECTOR_RE = re.compile(
+    r"^(?:ainsi|par ailleurs|en effet|de plus|en outre|notamment|dès lors|de surcroît|"
+    r"d'autre part|d'une part|enfin|également|aussi|toutefois|cependant|néanmoins|par conséquent),?\s", re.I)
 
 FR_ETRE = r"(?:est|sont|était|étaient|sera|seront|soit|soient|être|été)"
 FR_PASSIVE_RE = re.compile(
@@ -426,6 +449,10 @@ def check(text: str, strict: bool, lang: str = "auto") -> list[Finding]:
 
     for start, para in paragraphs(lines):
         sents = sentences(para)
+        if lang == "fr" and len(sents) >= 3:
+            hits = sum(bool(FR_CONNECTOR_RE.match(x.replace("’", "'"))) for x in sents)
+            if hits >= 3 or (hits >= 2 and hits * 2 >= len(sents)):
+                f.append(Finding(start, "connectors", f"{hits} of {len(sents)} sentences start with a connector (§27): keep only the ones the logic needs", para[:80]))
         if len(sents) > 6:
             f.append(Finding(start, "paragraph-length", f"{len(sents)} sentences in one paragraph (max 6)", para[:80]))
         for s in sents:

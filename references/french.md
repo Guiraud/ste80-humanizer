@@ -1,6 +1,6 @@
 # Le français : passe 1 et passe 2
 
-Lisez ce fichier avant de modifier un texte français. Il donne les tics d'IA en français (§1 à §26), les règles de structure adaptées au français (S1 à S15) et les mots simples. La typographie (T1 à T12) est dans `french-typography.md`.
+Lisez ce fichier avant de modifier un texte français. Il donne les tics d'IA en français (§1 à §29), les règles de structure adaptées au français (S1 à S15) et les mots simples. La typographie (T1 à T12) est dans `french-typography.md`.
 
 Les numéros sont ceux de SKILL.md. Signalez vos corrections avec ces numéros, par exemple « §1, §12, S6, T1 ».
 
@@ -14,17 +14,19 @@ ASD-STE100 est une norme pour l'anglais. Ce fichier applique ses règles de stru
 
 ## Passe 1 : les tics d'IA en français
 
-*Faible seul* signifie : agissez seulement si d'autres tics sont proches.
+Les numéros §1 à §26 suivent le catalogue de blader/humanizer. La section G (§27 à §29) ajoute trois tics propres au français. Elle reprend la section G de ferr079/humanizer-fr.
+
+*Faible seul* signifie : agissez seulement si d'autres tics sont proches. Plusieurs tics ensemble font un indice. Un seul tic faible ne prouve rien.
 
 ### A. Mettre en scène au lieu de dire (agir dès la première occurrence)
 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
-| 1 | Pas X mais Y | ce n'est pas seulement X, c'est Y. Non seulement X, mais aussi Y. Il ne s'agit pas de X, mais de Y. Bien plus qu'un X. Loin d'être un simple X | Dites le fait. Gardez le contraste seulement si le lecteur croit X. |
-| 2 | Chutes et fragments | « Et ça change tout. » « Point final. » « Rien de plus. Rien de moins. » Une question suivie de sa réponse : « Le résultat ? Un gain de temps. » | Supprimez la chute qui répète. Fusionnez les fragments en une affirmation. |
-| 3 | Fausse profondeur | au fond, en fin de compte, la vraie question est, dans un monde où, à l'ère de, à l'heure où | Écrivez l'affirmation précise. |
-| 4 | Entrée en scène | Plongeons dans, Entrons dans le vif du sujet, Voici ce qu'il faut retenir, Sans plus attendre, Soyons honnêtes | Supprimez. Commencez par le fait. |
-| 5 | Débat sans adversaire | Soyons clairs, Entendons-nous bien, On pourrait croire que, Contrairement aux idées reçues, Certes... mais | Supprimez la défense, sauf si quelqu'un a fait l'objection. |
+| 1 | Pas X mais Y | ce n'est pas seulement X, c'est Y. Non seulement X, mais aussi Y. Il ne s'agit pas de X, mais de Y. Ne se contente pas de X, il Y. Bien plus qu'un X. Loin d'être un simple X. Le même contraste sur deux phrases : « Cela ne veut pas dire X. Cela veut dire Y. » Une queue négative : « …, zéro prise de tête », « …, sans friction » | Dites le fait. Gardez le contraste seulement si le lecteur croit X, ou si les deux moitiés portent une information. |
+| 2 | Chutes et fragments | « Et ça change tout. » « Tout est dit. » « C'est toute la différence. » « À méditer. » Une question suivie de sa réponse : « Le résultat ? Un gain de temps. » « En conclusion », « En somme », « Pour résumer » suivis d'une redite. Une rafale : « Pas de cloud. Pas d'abonnement. Pas de compromis. » | Supprimez la chute qui répète. Gardez-la si elle ajoute un fait. Fusionnez les fragments en une affirmation. |
+| 3 | Fausse profondeur | au fond, en réalité, la vraie question est, ce qui compte vraiment, le cœur du problème, X est le langage de Y, X n'est pas un outil mais un miroir, incarne l'essence même de | Écrivez l'affirmation précise. |
+| 4 | Entrée en scène | il est important de noter que, il convient de souligner que, à l'ère de, dans un monde où, dans le paysage actuel de, plongeons dans, entrons dans le vif du sujet, sans plus attendre, voici ce qu'il faut retenir, maintenant que nous avons posé les bases, « Franchement ? », « La vérité, c'est que » | Supprimez l'amorce. Commencez par le fait. « Franchement » au milieu d'une phrase familière est normal. |
+| 5 | Débat sans adversaire | soyons clairs, entendons-nous bien, comprenez-moi bien, je ne dis pas que, loin de moi l'idée de, certains diront que, on pourrait être tenté de, contrairement aux idées reçues | Supprimez la défense. Gardez une objection que le texte attribue à quelqu'un, ou une option que le lecteur envisage vraiment. |
 
 **Avant :**
 > Ce n'est pas seulement un outil de build plus rapide, c'est une nouvelle façon de penser votre pipeline.
@@ -38,16 +40,22 @@ ASD-STE100 est une norme pour l'anglais. Ce fichier applique ses règles de stru
 **Après :**
 > Nous avons déplacé l'API vers la périphérie. La latence est maintenant de 40 ms.
 
+**Avant (fausse alternative) :**
+> Les jetons changent toutes les 24 heures. On pourrait être tenté de redémarrer le service par une tâche cron, mais cela couperait les sessions. La rotation se fait à chaud.
+
+**Après :**
+> Les jetons changent toutes les 24 heures. La rotation se fait à chaud, sans couper les sessions.
+
 ### B. Le rythme mécanique
 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
-| 6 | Triades forcées | « rapide, fiable et évolutif ». Trois exemples parallèles puis une leçon | Gardez trois éléments seulement si le sens en a trois. |
-| 7 | Débuts répétés *(faible seul)* | Il lit... Il vérifie... Il lance... Un connecteur en tête de chaque phrase : De plus, En outre, Par ailleurs, Ainsi, En effet | Fusionnez les phrases. Supprimez les connecteurs que la logique ne demande pas. |
-| 8 | Tirets partout | l'incise entre tirets (— ou –), ` -- ` | Aucun tiret d'incise dans le texte final. Utilisez un point, une virgule, un deux-points ou des parenthèses. Le tiret de dialogue et le tiret d'intervalle restent (T9). |
-| 9 | Précautions empilées *(faible seul)* | pourrait potentiellement, peut éventuellement, semble pouvoir, dans certains cas il se peut que | Gardez une seule précaution si la source la donne. |
-| 10 | Paires à trait d'union | Ce tic est anglais. | Ne l'appliquez pas. Les règles du trait d'union français sont en T9. |
-| 11 | Phrases sans sujet *(faible seul)* | « Aucun compte requis. Données synchronisées. » | Nommez l'acteur (S6). |
+| 6 | Triades forcées | « rapide, fiable et évolutif ». Trois exemples parallèles puis une leçon. Trois faits courts puis une morale | Gardez trois éléments seulement si le sens en a trois. |
+| 7 | Débuts répétés *(faible seul)* | Il lit... Il vérifie... Il lance... | Fusionnez les phrases ou commencez par l'action. Une répétition voulue pour le rythme reste. Pour les connecteurs en tête de phrase, voir §27. |
+| 8 | Tirets partout | l'incise entre tirets (— ou –), ` -- ` | Aucun tiret d'incise dans le texte final, sauf si l'échantillon de l'auteur en emploie. Utilisez un point, une virgule, un deux-points ou des parenthèses. Le tiret de dialogue et le tiret d'intervalle restent (T9). |
+| 9 | Précautions empilées *(faible seul)* | pourrait potentiellement, peut éventuellement, il se pourrait que, dans une certaine mesure, de manière générale, il semblerait que | Gardez une seule précaution si la source la donne. « Peut-être » et « souvent » seuls sont des habitudes humaines. |
+| 10 | Paires à trait d'union | Ce tic est anglais. | Ne l'appliquez pas. Le numéro reste pour garder la correspondance. Les règles du trait d'union sont en T9. |
+| 11 | Phrases sans sujet *(faible seul)* | « Aucun compte requis. Données synchronisées. » | Nommez l'acteur (S6). Le passif et « on » sont plus courants en français qu'en anglais. En passe 1, seul leur usage systématique est un tic. |
 
 **Avant :**
 > Le nouveau tableau de bord est rapide, intuitif et puissant.
@@ -61,14 +69,13 @@ Le fait est souvent juste. Gardez le fait et supprimez l'habillage.
 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
-| 12 | Mots usés par l'IA | crucial, primordial, incontournable, véritable, robuste, novateur, holistique, pléthore, myriade, panoplie, synergie, pierre angulaire, mettre en lumière, témoigner de, exploiter, tirer parti de, il convient de noter | Utilisez le mot simple (liste plus bas). |
-| 12 | Calques de l'anglais | faire sens, adresser un problème, au final, impacter, initier un projet, en charge de, « définitivement » pour « vraiment », « éventuellement » pour « finalement » | Utilisez le tour français : avoir du sens, traiter un problème, finalement, toucher, lancer, chargé de. |
-| 13 | Importance gonflée | marque un tournant, joue un rôle clé, s'inscrit dans une dynamique, un héritage durable, l'avenir s'annonce prometteur | Gardez le fait. Terminez sur le dernier fait concret. |
-| 14 | Lien vague | lié à, associé à, en lien avec | Nommez la relation que la source donne. N'en inventez pas. |
-| 15 | Participes présents en fin de phrase | « , soulignant », « , témoignant de », « , permettant ainsi de », « , garantissant », « , reflétant » | Supprimez la fin de phrase, sauf si la source appuie son affirmation. |
-| 16 | Langage de vente | révolutionnaire, époustouflant, de pointe, de classe mondiale, à couper le souffle, niché au cœur de | Dites ce que la chose est et ce qu'elle fait. |
-| 17 | Autorité empruntée | les experts s'accordent, selon des études, de nombreux observateurs estiment | Nommez qui a dit quoi, ou supprimez. N'inventez jamais une source. |
-| 18 | Éviter « être » et « avoir » | constitue, représente, s'avère, se positionne comme, s'impose comme, fait office de, dispose de, bénéficie de, arbore | Écrivez « est », « sont », « a ». |
+| 12 | Mots usés par l'IA | crucial, primordial, incontournable, véritable (comme intensif), robuste (au figuré), fluide, transparent (au figuré), clé en main, à la pointe, en constante évolution, novateur, holistique, pléthore, myriade, panoplie, levier, synergie, écosystème (au figuré), paysage (au sens abstrait), pierre angulaire, décrypter, méticuleux, exploiter, tirer parti de | Utilisez le mot simple (liste plus bas). Gardez le sens technique : un système robuste aux pannes, un écosystème biologique. |
+| 13 | Importance gonflée | marque un tournant, joue un rôle clé, témoigne de, s'impose comme une référence, ouvre la voie à, laisse une empreinte durable, un héritage durable, « Malgré ces défis, … continue de prospérer », l'avenir s'annonce prometteur, « fait remarquable », « de façon impressionnante ». Une section « Défis et perspectives » toute faite | Gardez le fait. Terminez sur le dernier fait concret. Si la source donne de vrais projets, citez-les. |
+| 14 | Lien vague | lié à, associé à, en lien avec, en relation avec, impliqué dans | Nommez la relation que la source donne. Si elle ne la donne pas, gardez la tournure vague. N'inventez pas un rôle. |
+| 15 | Participes présents en fin de phrase | « , soulignant », « , témoignant de », « , illustrant », « , reflétant », « , symbolisant », « , permettant ainsi de », « , garantissant », « , mettant en valeur » | Supprimez la fin de phrase, sauf si la source appuie son affirmation. |
+| 16 | Langage de vente | révolutionnaire, époustouflant, de pointe, de classe mondiale, de renom, sans précédent, à couper le souffle, niché au cœur de, riche patrimoine, une expérience unique, un cadre exceptionnel, un large éventail, un engagement fort en faveur de | Dites ce que la chose est et ce qu'elle fait. |
+| 17 | Autorité empruntée | les experts s'accordent, il est largement reconnu, beaucoup pensent, selon certains observateurs, plusieurs études montrent (sans les citer). Une liste de médias prestigieux. Un nombre d'abonnés | Nommez qui a dit quoi, ou supprimez. N'inventez jamais une source. L'absence de source seule n'est pas un tic. |
+| 18 | Éviter « être » et « avoir » | constitue, représente, s'avère, se révèle être, se positionne comme, s'impose comme, joue le rôle de, fait office de, dispose de, bénéficie de, arbore, propose (pour « a ») | Écrivez « est », « sont », « a ». |
 
 **Avant :**
 > La version 2.0 marque un tournant, témoignant d'une évolution plus large vers des outils pensés pour les développeurs.
@@ -76,24 +83,30 @@ Le fait est souvent juste. Gardez le fait et supprimez l'habillage.
 **Après :**
 > La version 2.0 ajoute une interface en ligne de commande. Elle ne prend plus en charge Node 16.
 
-Les termes du métier ne sont pas des calques. Gardez « commit », « build », « pull request » si l'équipe les utilise.
+**Avant (lien vague) :**
+> Il est associé à l'orchestre Rajhans, qu'il a fondé et qu'il dirige.
+
+**Après :**
+> Il a fondé l'orchestre Rajhans et le dirige.
+
+Les termes du métier ne sont pas des tics. Gardez « commit », « build », « pull request » si l'équipe les utilise.
 
 ### D. La mise en forme mécanique
 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
-| 19 | Gras décoratif | une étiquette en gras et un deux-points sur chaque élément de liste | Supprimez le gras. Gardez-le pour les avertissements et les libellés d'interface. |
-| 20 | Titres décoratifs | Des Majuscules À Chaque Mot, des émojis, des flèches | Une majuscule au premier mot et aux noms propres (T4). Nommez le contenu de la section. |
-| 21 | Guillemets anglais *(faible seul)* | “...” ou "..." pour une citation dans la prose | Utilisez « » (T2). Laissez le code tel quel. |
+| 19 | Gras décoratif | des mots en gras sans raison, une étiquette en gras et un deux-points sur chaque élément de liste | Supprimez le gras. Passez la liste en prose si les étiquettes n'apportent rien. Gardez le gras pour les avertissements et les libellés d'interface. |
+| 20 | Titres décoratifs | Des Majuscules À Chaque Mot, des émojis, des flèches (→), un filet horizontal entre chaque section, un titre de niveau 1 qui répète le titre du document | Une majuscule au premier mot et aux noms propres (T4). Nommez le contenu de la section. Donnez le titre une seule fois. |
+| 21 | Guillemets droits ou anglais *(faible seul)* | `"..."` ou `“...”` pour une citation dans la prose | Utilisez « » (T2). Beaucoup de claviers produisent des guillemets droits. Laissez le code tel quel. |
 
 ### E. Les restes du dialogue et du brouillon (supprimer)
 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
-| 22 | Restes de chatbot | Excellente question !, Bien sûr !, J'espère que cela vous aide, N'hésitez pas à, Souhaitez-vous que je | Supprimez l'emballage. Gardez le contenu. |
-| 23 | Limites de connaissance | à ma connaissance, d'après mes dernières informations, les détails sont limités | Dites ce que la source ne montre pas, ou supprimez. |
+| 22 | Restes de chatbot | Excellente question !, Bien sûr !, Vous avez tout à fait raison, Voici un…, J'espère que cela vous aide, N'hésitez pas à, Souhaitez-vous que je, En tant que modèle de langage, En tant qu'IA | Supprimez l'emballage. Gardez le contenu. |
+| 23 | Limites de connaissance | à ma connaissance, d'après mes dernières informations, selon les informations disponibles, bien que les détails soient limités, non documenté publiquement. Une supposition après l'aveu : « elle a probablement grandi », « ce qui suggère » | Dites ce que la source ne montre pas, ou supprimez. Ne comblez pas le vide. |
 | 24 | Titre répété | « ## Sécurité » puis « La sécurité est importante. » | Supprimez cette ligne. |
-| 25 | Texte sur le document | Dans cet article, nous allons voir. Le tableau ci-dessous compare. Comme mentionné précédemment | Parlez du sujet, pas du document. |
+| 25 | Texte sur le document | Dans cet article, nous allons voir. Le tableau ci-dessous compare. Comme mentionné précédemment. A été ajouté pour remplacer. Généré à partir de | Parlez du sujet, pas du document. Gardez une source que le lecteur peut suivre. |
 
 Dans une lettre, « Je reste à votre disposition » et « Veuillez agréer » sont des formules normales. Ne les supprimez pas.
 
@@ -102,6 +115,39 @@ Dans une lettre, « Je reste à votre disposition » et « Veuillez agréer 
 | § | Tic | À repérer | Correction |
 |---|---|---|---|
 | 26 | Réexpliquer ce que le lecteur sait | une réponse qui répète le problème et le diagnostic avant la décision | Commencez par la décision. Gardez le seul fait qui manque au lecteur. |
+
+### G. Propre au français
+
+| § | Tic | À repérer | Correction |
+|---|---|---|---|
+| 27 | Connecteurs en surnombre *(faible seul)* | un connecteur en tête de presque chaque phrase : ainsi, par ailleurs, en effet, de plus, en outre, notamment, dès lors, de surcroît, force est de constater que | Supprimez les connecteurs que la logique ne demande pas. Un connecteur utile reste. C'est la série qui fait le tic. |
+| 28 | Anglicismes calqués | adresser un problème, supporter (un format), délivrer (un service), initier (un projet), impacter, au final, faire sens, être en charge de, une opportunité (une occasion), digital (numérique), « définitivement » pour « vraiment », « éventuellement » pour « finalement » | Utilisez le tour français : traiter, prendre en charge, livrer, lancer, toucher, finalement, avoir du sens, être chargé de, une occasion, numérique. Gardez le calque s'il est devenu l'usage du lecteur. |
+| 29 | Verbes et formules vides | mettre en lumière, s'inscrire dans une démarche, venir + infinitif (« vient renforcer »), permettre de (en série), se veut, apporter une réponse à, procéder à | Gardez le verbe qui porte l'action (S8). |
+
+**Avant :**
+> Ainsi, le serveur démarre. Par ailleurs, il journalise les erreurs. De plus, il envoie une alerte.
+
+**Après :**
+> Le serveur démarre, journalise les erreurs et envoie une alerte.
+
+**Avant :**
+> Cette version adresse le bug et supporte désormais IPv6.
+
+**Après :**
+> Cette version corrige le bug et prend désormais en charge IPv6.
+
+**Avant :**
+> Cette mise à jour s'inscrit dans une démarche de sécurité et vient corriger deux failles.
+
+**Après :**
+> Cette mise à jour corrige deux failles.
+
+### Quand ne pas agir
+
+- Une citation, un titre d'œuvre, un nom propre, ou une phrase qui parle de la tournure au lieu de l'employer.
+- Une répétition voulue pour le rythme : « Je suis venu, j'ai vu, j'ai vaincu. »
+- Un texte écrit avant le 30 novembre 2022.
+- Les détails qui portent la voix de l'auteur : un détail précis et inattendu, des sentiments mêlés, de l'argot d'une époque, une vraie digression ou une autocorrection.
 
 ## Passe 2 : la structure STE80 en français
 
@@ -194,6 +240,14 @@ Utilisez le remplacement s'il sonne juste. Sinon, gardez le mot.
 | un certain nombre de | plusieurs, ou le nombre |
 | crucial, primordial | important, ou le fait |
 | robuste | fiable, solide |
+| adresser (un problème) | traiter, résoudre |
+| supporter (un format) | prendre en charge |
+| délivrer (un service) | livrer, fournir |
+| une opportunité | une occasion |
+| digital | numérique |
+| vient renforcer, vient corriger | renforce, corrige |
+| se veut simple | est simple, ou supprimez |
+| s'inscrire dans une démarche de | supprimez, ou le verbe direct |
 
 ## Exemple complet
 
@@ -207,6 +261,6 @@ Utilisez le remplacement s'il sonne juste. Sinon, gardez le mot.
 >
 > Une sonde mal configurée peut aussi provoquer des redémarrages en cascade. Pour l'éviter, ajustez `initialDelaySeconds` et `failureThreshold` avec soin.
 
-Corrections : §22 l'ouverture, §18 « constituent », §16 « mécanisme puissant », §8 le tiret, §1 « pas seulement », §15 « garantissant ainsi », §12 « néanmoins » et « il est important de noter », §9 « pourraient potentiellement », §2 la chute. Puis S6 la voix active, S1 une idée par phrase, S14 l'instruction séparée, T1 les espaces.
+Corrections : §22 l'ouverture, §18 « constituent », §16 « mécanisme puissant », §8 le tiret, §1 « pas seulement », §15 « garantissant ainsi », §4 « il est important de noter », S10 « néanmoins », §9 « pourraient potentiellement », §2 la chute. Puis S6 la voix active, S1 une idée par phrase, S14 l'instruction séparée, T1 les espaces.
 
 Chaque fait reste : le kubelet, le redémarrage, la disponibilité, les redémarrages en cascade et les deux paramètres. « Pourraient potentiellement » devient « peut », pas « provoque ».

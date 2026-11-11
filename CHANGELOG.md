@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.2.0
+
+- French tells now draw on [ferr079/humanizer-fr](https://github.com/ferr079/humanizer-fr) (MIT). Its license notice is in `THIRD_PARTY_NOTICES.md`.
+- New section G in `references/french.md` and in SKILL.md: §27 too many connectors, §28 calques from English, §29 empty verbs and phrases. Connectors and calques moved there from §7 and §12.
+- Longer "À repérer" lists for §1 to §25 in French, for example "ne se contente pas de", "Tout est dit.", "il se pourrait que", "ouvre la voie à", "Vous avez tout à fait raison".
+- New nuances in French: passive voice and "on" are a tell only when systematic (§11). A vague link stays vague if the source gives no relation (§14). A missing source alone is not a tell (§17).
+- New French "Quand ne pas agir" list, and new plain words (délivrer, supporter, opportunité, digital, se veut).
+- `ste_check.py` flags the new French phrases, calques and empty verbs. It flags a paragraph where most sentences start with a connector (rule `connectors`). English results do not change.
+
 ## 4.1.0
 
 - French support. SKILL.md has a new section "French text": the French phrases for Pass 1, the S-rules that change in French, and a third pass for French typography (T1 to T12).

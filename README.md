@@ -199,7 +199,14 @@ More examples: [references/ste80-rules.md](references/ste80-rules.md). Full stri
 
 The skill treats French as a full language, not as translated English. When the text is French, it works in French and does three passes:
 
-1. **Pass 1** uses the French form of each tell: "ce n'est pas seulement X, c'est Y", "Et ça change tout.", "Plongeons dans", "il convient de noter", ", témoignant de", "constitue", "N'hésitez pas à". It also removes calques from English such as "faire sens" and "adresser un problème".
+1. **Pass 1** uses the French form of each tell: "ce n'est pas seulement X, c'est Y", "Et ça change tout.", "Plongeons dans", "il est important de noter", ", témoignant de", "constitue", "N'hésitez pas à". It adds three tells that exist only in French:
+
+   | # | Tell | Before | After |
+   |---|---|---|---|
+   | §27 | Too many connectors (*weak alone*) | Ainsi, le serveur démarre. Par ailleurs, il journalise. De plus, il alerte. | Le serveur démarre, journalise et alerte. |
+   | §28 | Calques from English | Cette version adresse le bug et supporte IPv6. | Cette version corrige le bug et prend en charge IPv6. |
+   | §29 | Empty verbs and phrases | Elle s'inscrit dans une démarche de sécurité et vient corriger deux failles. | Elle corrige deux failles. |
+
 2. **Pass 2** applies the S-rules with French grammar: présent, passé composé and futur simple, "vous" imperatives, a named actor in place of "on", "vérifier" in place of "procéder à la vérification de". At 80%, a sentence can have up to 25 words (instruction) or 30 words (description).
 3. **Pass 3** applies French typography, rules T1 to T12.
 
@@ -220,6 +227,8 @@ The skill treats French as a full language, not as translated English. When the 
 
 Three rules of classic French typography give way to the other passes. The skill does not use a dash for an aside (§8). It does not end list items with a semicolon (S15). It uses « » in French prose, and keeps straight quotes in code (§21).
 
+Section G (§27 to §29) and many of the French phrases come from [ferr079/humanizer-fr](https://github.com/ferr079/humanizer-fr), the French adaptation of blader/humanizer by Stéphane Ferreira (MIT).
+
 The French rules are in two files, written in French: [references/french.md](references/french.md) and [references/french-typography.md](references/french-typography.md). The typography rules follow the *Lexique des règles typographiques en usage à l'Imprimerie nationale* and the recommendations of the Académie française.
 
 **En bref, en français.** Collez un texte français et demandez « humanise ce texte ». Le skill retire les tics d'IA, raccourcit les phrases, met la voix active et corrige la typographie. Il garde chaque fait et ne traduit rien.
@@ -236,7 +245,7 @@ python scripts/ste_check.py --lang fr article.md
 python scripts/ste_check.py --fix-spaces article.md
 ```
 
-The checker finds the language (English or French) by itself. In French, it flags the French tells and stock words, possible passive voice and typography errors (rules `typo-T1` to `typo-T11`). `--fix-spaces` changes a French file in place: it writes the no-break spaces before `: ; ! ?`, inside « » and before units. It does not change code, URLs or front matter.
+The checker finds the language (English or French) by itself. In French, it flags the French tells and stock words, calques, empty verbs, paragraphs where most sentences start with a connector, possible passive voice and typography errors (rules `typo-T1` to `typo-T11`). `--fix-spaces` changes a French file in place: it writes the no-break spaces before `: ; ! ?`, inside « » and before units. It does not change code, URLs or front matter.
 
 It is a heuristic, not an AI detector and not a compliance checker.
 
@@ -259,6 +268,7 @@ What we saw: when the prompt names ASD-STE100, the base model already gets the s
 - ASD-STE100 Issue 9 (2025): https://www.asd-ste100.org
 - Wikipedia, [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (WikiProject AI Cleanup)
 - [blader/humanizer](https://github.com/blader/humanizer) by Siqi Chen (MIT). Pass 1 follows its 26-pattern catalog and order, with new examples. Its license notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- [ferr079/humanizer-fr](https://github.com/ferr079/humanizer-fr) by Stéphane Ferreira (MIT), the French adaptation of blader/humanizer. The French tells §27 to §29 and many French phrases come from it. Its license notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - *Lexique des règles typographiques en usage à l'Imprimerie nationale* and the recommendations of the Académie française, for the French typography rules.
 - Hacker News discussion of STE skills (July 2026): https://news.ycombinator.com/item?id=49114639
 

@@ -13,7 +13,7 @@ description: |
   for "humaniser", "rendre ce texte plus naturel", "langage clair", "typographie française").
 license: MIT
 metadata:
-  version: "4.1.0"
+  version: "4.2.0"
   author: "Dodaios"
 ---
 
@@ -187,21 +187,29 @@ Act on §26 only when you can see the conversation or the text is plainly a repl
 
 ## French text
 
-Work in French. Do not translate. Before you edit French text, read `references/french.md` (the tells, the structure rules and the plain words, all in French) and `references/french-typography.md` (T1 to T12). The §-numbers and S-numbers stay the same.
+Work in French. Do not translate. Before you edit French text, read `references/french.md` (the tells §1 to §29, the structure rules and the plain words, all in French) and `references/french-typography.md` (T1 to T12). The §-numbers and S-numbers stay the same.
 
 **Pass 1.** The tells are the same, but the phrases are French:
 
 | § | French phrases to watch for |
 |---|---|
-| 1 | ce n'est pas seulement X, c'est Y; non seulement X, mais aussi Y; il ne s'agit pas de X, mais de Y |
-| 2 | "Et ça change tout."; a question with its own answer ("Le résultat ? Un gain de temps.") |
-| 4, 5 | Plongeons dans, Voici ce qu'il faut retenir, Soyons clairs, Contrairement aux idées reçues |
-| 12 | crucial, incontournable, véritable, robuste, pléthore, mettre en lumière, il convient de noter. Also calques from English: faire sens, adresser un problème, au final, impacter |
+| 1 | ce n'est pas seulement X, c'est Y. Non seulement X, mais aussi Y. Ne se contente pas de X, il Y. "..., zéro prise de tête" |
+| 2 | "Et ça change tout." "Tout est dit." "En conclusion" before a repeat. A question with its own answer ("Le résultat ? Un gain de temps.") |
+| 4, 5 | il est important de noter que, à l'ère de, Plongeons dans, Soyons clairs, je ne dis pas que, on pourrait être tenté de |
+| 12 | crucial, incontournable, véritable, robuste, fluide, clé en main, écosystème, levier, pléthore, pierre angulaire |
 | 15 | ", soulignant", ", témoignant de", ", permettant ainsi de", ", garantissant" |
 | 18 | constitue, s'avère, se positionne comme, dispose de, bénéficie de (write "est", "a") |
-| 22 | Excellente question !, N'hésitez pas à, J'espère que cela vous aide |
+| 22 | Excellente question !, Vous avez tout à fait raison, N'hésitez pas à, J'espère que cela vous aide |
 
-§10 is an English tell. Do not apply it to French.
+§10 is an English tell. Do not apply it to French. In French, passive voice and "on" are more common than in English. For §11, only their systematic use is a tell.
+
+French adds three tells (§27 to §29, from ferr079/humanizer-fr):
+
+| § | Tell | Watch for | Fix |
+|---|---|---|---|
+| 27 | Too many connectors *(weak alone)* | ainsi, par ailleurs, en effet, de plus, en outre at the start of almost every sentence | Keep a connector only where the logic needs it. |
+| 28 | Calques from English | adresser un problème, supporter un format, délivrer, initier, impacter, au final, faire sens, opportunité, digital | Use the French phrase: traiter, prendre en charge, livrer, lancer, toucher, finalement, avoir du sens, occasion, numérique. |
+| 29 | Empty verbs and phrases | mettre en lumière, s'inscrire dans une démarche, vient renforcer, se veut, apporter une réponse à | Put the action in the verb (S8). |
 
 **Pass 2.** These S-rules change:
 
